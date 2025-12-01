@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Happy 18th Birthday Aakriti 🌸❄️</title>
+<style>
+  /* ---------- Base & fonts ---------- */
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Dancing+Script:wght@600&display=swap');
+
+  :root{
+    --bg1: #fff6fb;     /* pale pink */
+    --bg2: #f3f8ff;     /* pale blue for snow */
+    --accent-pink: #ff6fb3;
+    --accent-gold: #f0c36d;
+    --soft: rgba(0,0,0,0.06);
+    --card-radius: 18px;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+    color:#2a2a2a;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* ---------- Layout ---------- */
+  .container{
+    max-width:1100px;
+    margin:28px auto;
+    padding:20px;
+  }
+
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:18px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .logo{
+    width:56px;height:56px;border-radius:12px;
+    background:linear-gradient(135deg,#ffd5e8,#e6f2ff);
+    display:grid;place-items:center;font-weight:900;color:#fff;
+    box-shadow:0 8px 18px rgba(100,50,120,0.08);
+    font-family: 'Dancing Script', cursive;
+  }
+  .brand h1{margin:0;font-size:18px}
+  .nav{
+    display:flex;gap:8px;
+  }
+  .nav button{
+    background:transparent;border:none;padding:8px 14px;border-radius:10px;font-weight:600;cursor:pointer;
+  }
+  .nav button.active{
+    background:linear-gradient(90deg,#ffd5e8,#e6f2ff);
+    box-shadow:0 6px 12px rgba(0,0,0,0.06);
+  }
+
+  /* ---------- Card area ---------- */
+  .card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65));
+    border-radius:var(--card-radius);
+    padding:28px;
+    position:relative;
+    overflow:hidden;
+    box-shadow: 0 12px 30px rgba(40,20,60,0.06);
+  }
+
+  .top-row{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+  .photo-frame{
+    width:calc(50% - 10px);
+    min-width:220px;
+    border-radius:16px;
+    overflow:hidden;
+    background:linear-gradient(180deg, #fff, #fff0);
+    border:6px solid rgba(255,255,255,0.6);
+    box-shadow: 0 8px 22px rgba(100,30,80,0.06);
+    transform-origin:center;
+    transition:transform 0.45s ease, box-shadow 0.45s ease;
+  }
+  .photo-frame img{width:100%;height:100%;object-fit:cover;display:block}
+  .photo-frame:hover{transform:scale(1.03);box-shadow: 0 18px 34px rgba(100,30,80,0.12)}
+
+  /* Title */
+  .title{
+    flex:1;
+    min-width:240px;
+  }
+  .title h2{
+    margin:6px 0 0 0;
+    font-family:'Dancing Script', cursive;
+    color:var(--accent-pink);
+    font-size:40px;
+    letter-spacing:0.6px;
+    text-shadow: 0 4px 20px rgba(240,120,180,0.08);
+  }
+  .title p{margin:8px 0 0 0;color:#555}
+
+  /* Magic button */
+  .magic-row{display:flex;gap:12px;align-items:center;margin-top:18px}
+  .magic-btn{
+    background:linear-gradient(90deg,var(--accent-pink),#ff92d0);
+    color:white;border:none;padding:12px 20px;border-radius:12px;font-weight:800;font-size:16px;
+    box-shadow:0 10px 22px rgba(255,110,170,0.16);cursor:pointer;
+  }
+  .mute-toggle{
+    background:transparent;border:2px dashed rgba(0,0,0,0.06);padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;
+  }
+
+  /* Decorations container (absolute) */
+  .decor{
+    position:absolute;inset:0;pointer-events:none;z-index:6;
+  }
+
+  /* petals */
+  .petal{
+    position:absolute;top:-10%;
+    width:18px;height:24px;background:radial-gradient(circle at 60% 30%, #fff 0 20%, #ffb2d9 22% 48%, #ff6fb3 60%);
+    transform:rotate(15deg);
+    opacity:0.95;border-radius:60% 60% 60% 60%;
+    filter:drop-shadow(0 6px 10px rgba(150,40,90,0.08));
+    animation:fall linear;
+  }
+  /* snow */
+  .snow{
+    position:absolute;top:-6%;width:10px;height:10px;background:rgba(255,255,255,0.95);border-radius:50%;
+    box-shadow:0 0 14px rgba(255,255,255,0.6);
+    animation:snowfall linear;
+    opacity:0.95;
+  }
+
+  /* balloons (created dynamically) */
+  .balloon{
+    position:absolute;bottom:-40px;width:40px;height:55px;border-radius:50% 50% 50% 50%;
+    transform-origin:center bottom;display:flex;align-items:flex-end;justify-content:center;
+    box-shadow:0 8px 18px rgba(0,0,0,0.12);
+    animation:rise linear forwards;
+  }
+  .balloon:after{
+    content:"";width:2px;height:40px;background:rgba(0,0,0,0.12);position:absolute;bottom:-36px;
+    left:50%;transform:translateX(-50%);
+  }
+
+  /* heart */
+  .heart{
+    position:absolute;width:28px;height:28px;background:transparent;transform:scale(0.7);
+    animation:popUp 1.6s ease forwards;
+  }
+  .heart:before,.heart:after{
+    content:"";position:absolute;width:18px;height:28px;background:var(--accent-pink);border-radius:10px 10px 0 0;
+  }
+  .heart:before{left:9px;transform:rotate(-45deg);transform-origin:0 100%}
+  .heart:after{left:0;transform:rotate(45deg);transform-origin:100% 100%}
+
+  /* confetti */
+  .confetti{
+    position:absolute;width:10px;height:16px;opacity:0.95;transform-origin:center;animation:confettiFall linear;
+  }
+
+  /* animations */
+  @keyframes fall{
+    0%{transform:translateY(-10vh) rotate(0) scale(0.9);opacity:1}
+    100%{transform:translateY(110vh) rotate(360deg) scale(0.95);opacity:0.65}
+  }
+  @keyframes snowfall{
+    0%{transform:translateY(-6vh) rotate(0) scale(0.7);opacity:0.9}
+    100%{transform:translateY(110vh) rotate(90deg) scale(1);opacity:0.85}
+  }
+  @keyframes rise{
+    0%{transform:translateY(0) scale(1)}
+    100%{transform:translateY(-140vh) scale(1)}
+  }
+  @keyframes popUp{
+    0%{transform:translateY(30px) scale(0.5);opacity:0}
+    50%{opacity:1}
+    100%{transform:translateY(-140px) scale(1);opacity:0}
+  }
+  @keyframes confettiFall{
+    0%{transform:translateY(-6vh) rotate(0)}
+    100%{transform:translateY(120vh) rotate(720deg)}
+  }
+
+  /* ---------- Page 2 (Letter) ---------- */
+  .letter-page{display:none;padding:30px;min-height:60vh}
+  .letter-wrap{
+    background:linear-gradient(180deg, rgba(255,255,255,0.93), rgba(255,255,255,0.85));
+    border-radius:20px;padding:28px;box-shadow:0 16px 34px rgba(80,20,80,0.06);
+    position:relative;overflow:hidden;
+  }
+  .handwritten{
+    font-family:'Dancing Script', cursive;font-size:22px;line-height:1.6;color:#2b2b2b;padding:8px 4px;
+  }
+  .butterfly{
+    position:absolute;right:12px;top:12px;width:64px;height:64px;opacity:0.95;animation:floaty 6s ease-in-out infinite;
+  }
+  @keyframes floaty{
+    0%{transform:translateY(0) rotate(0)}
+    50%{transform:translateY(-18px) rotate(6deg)}
+    100%{transform:translateY(0) rotate(0)}
+  }
+
+  /* footer */
+  footer{margin-top:18px;text-align:center;color:#666;font-size:13px}
+
+  /* responsive */
+  @media (max-width:800px){
+    .photo-frame{width:100%}
+    .top-row{flex-direction:column}
+    .title h2{font-size:32px}
+    .magic-row{flex-wrap:wrap}
+  }
+
+</style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">A</div>
+        <div>
+          <h1>Happy 18th Birthday — Aakriti</h1>
+          <div style="font-size:13px;color:#666;margin-top:4px">Flower garden + snowflake surprise</div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Main navigation">
+        <button class="active" id="btn-home" onclick="showPage('home')">Card</button>
+        <button id="btn-letter" onclick="showPage('letter')">Letter</button>
+      </nav>
+    </header>
+
+    <!-- PAGE 1: Card -->
+    <main id="home" class="card" role="main" aria-labelledby="card-heading">
+      <div class="top-row">
+        <div class="photo-frame" aria-hidden="false">
+          <!-- Replace src with your image link -->
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Photo of Aakriti — frame 1">
+        </div>
+
+        <div class="title">
+          <h2 id="card-heading">Happy 18th Birthday, Aakriti!</h2>
+          <p>May this year bring you bright petals of joy, soft snowy moments, and dreams that take flight. Press the <strong>Magic</strong> button to celebrate!</p>
+
+          <div class="magic-row">
+            <button class="magic-btn" id="magicBtn">✨ Magic</button>
+            <button class="mute-toggle" id="muteBtn" aria-pressed="false">🔊 Sound On</button>
+          </div>
+        </div>
+
+        <div class="photo-frame" aria-hidden="false">
+          <!-- Replace src with your image link -->
+          <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Photo of Aakriti — frame 2">
+        </div>
+      </div>
+
+      <!-- optional short message / small cake icon -->
+      <div style="margin-top:18px;color:#5a5a5a;font-weight:600">We love you endlessly — celebrate your day with smiles and sparkle ✨</div>
+
+      <!-- absolute decoration layer -->
+      <div class="decor" id="decor"></div>
+    </main>
+
+    <!-- PAGE 2: Letter -->
+    <section id="letter" class="letter-page" aria-labelledby="letter-heading">
+      <div class="letter-wrap">
+        <img class="butterfly" src="data:image/svg+xml;utf8,
+          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+            <g fill='%23ff92d0'>
+              <ellipse cx='18' cy='24' rx='12' ry='16' transform='rotate(-20 18 24)' />
+              <ellipse cx='46' cy='24' rx='12' ry='16' transform='rotate(20 46 24)' />
+            </g>
+            <circle cx='32' cy='36' r='6' fill='%23ffd5e8'/>
+          </svg>" alt="floating butterfly">
+
+        <h2 id="letter-heading" style="font-family:'Dancing Script',cursive;margin:4px 0 8px 0;color:var(--accent-pink)">A Letter to Aakriti on Her 18th Birthday</h2>
+
+        <div id="letterText" class="handwritten" aria-live="polite">
+          <!-- letter will be typed in by JS for gentle effect -->
+        </div>
+      </div>
+      <footer>Made with love 💖 — press <strong>Card</strong> to return and press <strong>Magic</strong> again for more surprises.</footer>
+    </section>
+
+  </div>
+
+  <!-- Sound (small chime) encoded as base64 to avoid external files -->
+  <audio id="chime" src="data:audio/mpeg;base64,//uQxAAAAAAAAAAAAAAAAAAAA..."></audio>
+
+<script>
+/* ---------------------------
+  Simple interactive animations
+  --------------------------- */
+
+const decor = document.getElementById('decor');
+const magicBtn = document.getElementById('magicBtn');
+const muteBtn = document.getElementById('muteBtn');
+const chime = document.getElementById('chime');
+
+// default sound state: on
+let soundOn = true;
+muteBtn.addEventListener('click', () => {
+  soundOn = !soundOn;
+  muteBtn.textContent = soundOn ? '🔊 Sound On' : '🔇 Muted';
+  muteBtn.setAttribute('aria-pressed', (!soundOn).toString());
+});
+
+// show/hide pages
+function showPage(which){
+  document.getElementById('home').style.display = which === 'home' ? 'block' : 'none';
+  document.getElementById('letter').style.display = which === 'letter' ? 'block' : 'none';
+  document.getElementById('btn-home').classList.toggle('active', which === 'home');
+  document.getElementById('btn-letter').classList.toggle('active', which === 'letter');
+  if(which === 'letter') startLetterTyping();
+}
+showPage('home'); // initial
+
+/* ---------- continuous gentle petals + snow (background) ---------- */
+function spawnBackgroundElements() {
+  // create a set of petals and snowflakes that fall slowly for ambience
+  const count = 14;
+  for (let i=0;i<count;i++){
+    // petals
+    const p = document.createElement('div');
+    p.className = 'petal';
+    const left = Math.random()*120 - 10; // may appear off-edge
+    p.style.left = left + 'vw';
+    p.style.animationDuration = (8 + Math.random()*10) + 's';
+    p.style.opacity = 0.9 - Math.random()*0.3;
+    p.style.transform = `rotate(${Math.random()*360}deg)`;
+    p.style.top = (-10 - Math.random()*20) + 'vh';
+    p.style.width = (12 + Math.random()*18) + 'px';
+    p.style.height = (16 + Math.random()*28) + 'px';
+    decor.appendChild(p);
+    // remove after animation
+    setTimeout(()=> p.remove(), 22000);
+  }
+
+  const snowCount = 10;
+  for(let j=0;j<snowCount;j++){
+    const s = document.createElement('div');
+    s.className = 'snow';
+    const left = Math.random()*110 - 5;
+    s.style.left = left + 'vw';
+    s.style.animationDuration = (10 + Math.random()*18) + 's';
+    s.style.opacity = 0.9 - Math.random()*0.4;
+    s.style.width = (6 + Math.random()*12) + 'px';
+    s.style.height = s.style.width;
+    s.style.top = (-6 - Math.random()*8) + 'vh';
+    decor.appendChild(s);
+    setTimeout(()=> s.remove(), 30000);
+  }
+}
+// spawn some initially and periodically to keep ambience
+spawnBackgroundElements();
+setInterval(spawnBackgroundElements, 7000);
+
+
+/* ---------- Magic button: confetti, balloons, hearts ---------- */
+magicBtn.addEventListener('click', () => {
+  // play sound if enabled
+  if(soundOn){
+    try { chime.currentTime = 0; chime.play(); } catch(e){}
+  }
+
+  launchBalloons(12);
+  burstConfetti(28);
+  popHearts(8);
+});
+
+/* balloons */
+function launchBalloons(n){
+  for(let i=0;i<n;i++){
+    const b = document.createElement('div');
+    b.className = 'balloon';
+    const colors = ['#ff93c9','#ffd8ea','#ffd5a6','#cbe7ff','#ffe0f8','#e3ffd9','#ffd1e6'];
+    const c = colors[Math.floor(Math.random()*colors.length)];
+    b.style.background = `radial-gradient(circle at 30% 20%, #ffffff66, ${c})`;
+    // random horizontal pos starting from bottom
+    const left = Math.random()*90 + 5;
+    b.style.left = left + 'vw';
+    b.style.bottom = (-40 - Math.random()*20) + 'px';
+    b.style.width = (28 + Math.random()*30) + 'px';
+    b.style.height = (40 + Math.random()*50) + 'px';
+    b.style.animationDuration = (6 + Math.random()*6) + 's';
+    b.style.opacity = 0.98;
+    // slight swaying
+    b.style.transition = 'transform 0.3s linear';
+    decor.appendChild(b);
+    // remove after animation completes
+    setTimeout(()=> b.remove(), 18000);
+  }
+}
+
+/* confetti */
+function burstConfetti(n){
+  for(let i=0;i<n;i++){
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    const w = 6 + Math.random()*12;
+    c.style.width = w + 'px';
+    c.style.height = (8 + Math.random()*18) + 'px';
+    const left = Math.random()*80 + 5;
+    c.style.left = left + 'vw';
+    c.style.top = (10 + Math.random()*20) + 'vh';
+    const colors = ['#ff6fb3','#fff06a','#ffd59c','#a8e7ff','#ffd5e8','#f8b6ff'];
+    c.style.background = colors[Math.floor(Math.random()*colors.length)];
+    c.style.animationDuration = (3 + Math.random()*3) + 's';
+    c.style.transform = `rotate(${Math.random()*360}deg)`;
+    decor.appendChild(c);
+    setTimeout(()=> c.remove(), 8000);
+  }
+}
+
+/* hearts */
+function popHearts(n){
+  for(let i=0;i<n;i++){
+    const h = document.createElement('div');
+    h.className = 'heart';
+    const left = Math.random()*80 + 8;
+    h.style.left = left + 'vw';
+    h.style.bottom = (20 + Math.random()*30) + 'px';
+    // random delay & scale
+    h.style.animationDelay = (Math.random()*0.6) + 's';
+    decor.appendChild(h);
+    setTimeout(()=> h.remove(), 2200 + Math.random()*800);
+  }
+}
+
+/* ---------- Typing letter on page 2 ---------- */
+const letter = `Dear Aakriti,
+
+Today you step into a beautiful new chapter — your 18th year. I want you to know how proud I am of everything you are and everything you are becoming.
+
+You have a gentle heart, a brilliant mind, and a spirit that lights up every room. As you move forward into adulthood, I wish you courage to chase your dreams, strength to face the hard times, and joy that fills your everyday moments.
+
+May your year be sprinkled with the softest petals of happiness and the gentlest snowflakes of peace. Believe in yourself, trust your path, and never forget how much you are loved.
+
+Happy 18th Birthday, Aakriti. The world is waiting for your magic.
+
+With all my love,
+[Your name] 💖`;
+
+let typed = false;
+function startLetterTyping(){
+  if(typed) return;
+  typed = true;
+  const el = document.getElementById('letterText');
+  el.textContent = '';
+  let i = 0;
+  const speed = 18; // ms per char
+  function step(){
+    if(i < letter.length){
+      el.textContent += letter[i++];
+      // auto scroll if overflow
+      el.parentElement.scrollTop = el.parentElement.scrollHeight;
+      setTimeout(step, speed + Math.random()*15);
+    }
+  }
+  step();
+}
+
+/* ---------- Helpful: easy function to replace photos (no need to reload entire file) ---------- */
+/* Example usage in console:
+   replacePhoto(1, 'https://your-image.jpg');
+*/
+function replacePhoto(frameIndex, url){
+  const frames = document.querySelectorAll('.photo-frame img');
+  if(frameIndex < 1 || frameIndex > frames.length) return;
+  frames[frameIndex-1].src = url;
+}
+
+/* Accessibility: allow pressing Enter on Magic Button */
+magicBtn.addEventListener('keyup', (e)=>{ if(e.key === 'Enter') magicBtn.click(); });
+
+</script>
+</body>
+</html>
